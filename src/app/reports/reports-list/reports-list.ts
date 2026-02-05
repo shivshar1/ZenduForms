@@ -136,6 +136,7 @@ export class ReportsList implements AfterViewInit {
   ];
 
   readonly columns: TableColumn[] = [
+    { key: '',label: '',sortable: false },
     { key: 'name', label: 'Report Name', sortable: true },
     { key: 'created', label: 'Created', sortable: true },
     { key: 'modified', label: 'Modified', sortable: true },
