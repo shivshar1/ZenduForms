@@ -1,0 +1,127 @@
+<section class="reports-table">
+  <!-- Search & Sort + Add button -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex align-items-center gap-3">
+      <div class="search-box">
+        <i class="bi bi-search text-muted"></i>
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <button
+        class="btn btn-light border dropdown-toggle"
+        (click)="onSortChange(sortBy === 'newest' ? 'oldest' : 'newest')"
+      >
+        Sort by: {{ sortBy === 'newest' ? 'Newest' : 'Oldest' }}
+      </button>
+
+      <button class="btn btn-primary">
+        <i class="bi bi-plus-lg me-2"></i>
+        Add new Report
+      </button>
+    </div>
+  </div>
+
+  <!-- Card container -->
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <!-- Table -->
+      <div class="table-responsive reports-list">
+        <table class="table align-middle mb-0">
+          <tbody>
+            <tr
+              *ngFor="let report of visibleReports; let i = index; trackBy: trackById"
+              class="report-row"
+              [class.report-row--highlighted]="hoveredRow !== null && hoveredRow === i"
+              (mouseenter)="hoveredRow = i"
+              (mouseleave)="hoveredRow = null"
+            >
+              <!-- Icon -->
+              <td>
+                <span class="icon-circle">
+                  <i class="bi bi-pie-chart-fill"></i>
+                </span>
+              </td>
+
+              <!-- Name -->
+              <td class="fw-semibold report-name">
+                {{ report.name }}
+              </td>
+
+              <!-- Meta -->
+              <td class="meta-cell">
+                <div class="label">Created</div>
+                <div class="value">{{ report.created | date : 'MMM d, y' }}</div>
+              </td>
+
+              <td class="meta-cell">
+                <div class="label">Modified</div>
+                <div class="value">{{ report.modified | date : 'MMM d, y' }}</div>
+              </td>
+
+              <td class="meta-cell">
+                <div class="label">Owner</div>
+                <div class="value text-truncate">{{ report.owner }}</div>
+              </td>
+
+              <td class="meta-cell">
+                <div class="label">Form</div>
+                <div class="value text-primary text-truncate">
+                  {{ report.form }}
+                </div>
+              </td>
+
+              <!-- Actions -->
+              <td class="text-end">
+                <button class="btn btn-light btn-sm rounded-circle me-1">
+                  <i class="bi bi-pencil text-primary"></i>
+                </button>
+                <button class="btn btn-light btn-sm rounded-circle" (click)="deleteReport(report)">
+                  <i class="bi bi-trash text-danger"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="visibleReports.length === 0">
+              <td colspan="7" class="text-center text-muted py-4">
+                No reports found.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="d-flex justify-content-between align-items-center mt-3 small text-muted">
+    <div>
+      {{ rangeStart }}-{{ rangeEnd }} of {{ totalRecords }} History Records
+    </div>
+
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="goToPage(currentPage - 1)">‹</button>
+      </li>
+
+      <li
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page === currentPage"
+      >
+        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="goToPage(currentPage + 1)">›</button>
+      </li>
+    </ul>
+  </div>
+</section>
+

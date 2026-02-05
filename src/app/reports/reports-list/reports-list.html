@@ -1,0 +1,70 @@
+<section class="reports p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-semibold mb-0">All Reports</h2>
+    <button class="btn btn-primary">
+      <i class="bi bi-plus-lg me-2"></i>
+      Add new Report
+    </button>
+  </div>
+
+  <app-searchable-paginated-table
+    [data]="reports"
+    [columns]="columns"
+    [pageSize]="5"
+    [searchFields]="searchFields"
+    [sortConfig]="defaultSort"
+    [recordLabel]="'History Records'"
+    [trackByFn]="trackById"
+    [rowTemplate]="reportRowTemplate"
+    (itemDelete)="onDelete($event)"
+    (itemEdit)="onEdit($event)"
+  ></app-searchable-paginated-table>
+
+  <ng-template #reportRowTemplate let-report>
+    <!-- Icon -->
+    <td>
+      <span class="icon-circle">
+        <i class="bi bi-pie-chart-fill"></i>
+      </span>
+    </td>
+
+    <!-- Name -->
+    <td class="fw-semibold report-name">
+      {{ report.name }}
+    </td>
+
+    <!-- Created -->
+    <td class="meta-cell">
+      <div class="label">Created</div>
+      <div class="value">{{ report.created | date : 'MMM d, y' }}</div>
+    </td>
+
+    <!-- Modified -->
+    <td class="meta-cell">
+      <div class="label">Modified</div>
+      <div class="value">{{ report.modified | date : 'MMM d, y' }}</div>
+    </td>
+
+    <!-- Owner -->
+    <td class="meta-cell">
+      <div class="label">Owner</div>
+      <div class="value text-truncate">{{ report.owner }}</div>
+    </td>
+
+    <!-- Form -->
+    <td class="meta-cell">
+      <div class="label">Form</div>
+      <div class="value text-primary text-truncate">{{ report.form }}</div>
+    </td>
+
+    <!-- Actions -->
+    <td class="text-end">
+      <button class="btn btn-light btn-sm rounded-circle me-1" (click)="onEdit(report)">
+        <i class="bi bi-pencil text-primary"></i>
+      </button>
+      <button class="btn btn-light btn-sm rounded-circle" (click)="onDelete(report)">
+        <i class="bi bi-trash text-danger"></i>
+      </button>
+    </td>
+  </ng-template>
+</section>

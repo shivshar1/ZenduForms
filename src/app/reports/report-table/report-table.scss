@@ -1,0 +1,98 @@
+.reports-table {
+  background: #f7f9fc;
+}
+
+/* Search box */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f3f6;
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  padding: 8px 12px;
+  max-width: 320px;
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+  }
+}
+
+/* Table spacing */
+.reports-list table {
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+/* Row style */
+.report-row {
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.report-row td {
+  padding: 16px 14px;
+  vertical-align: middle;
+  border-top: 1px solid #e6e9ef;
+  border-bottom: 1px solid #e6e9ef;
+}
+
+.report-row td:first-child {
+  border-left: 1px solid #e6e9ef;
+  border-radius: 8px 0 0 8px;
+}
+
+.report-row td:last-child {
+  border-right: 1px solid #e6e9ef;
+  border-radius: 0 8px 8px 0;
+}
+
+.report-row:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Highlighted row */
+.report-row--highlighted td {
+  background: #f3f8ff;
+  border-color: #4da3ff;
+}
+
+/* Icon */
+.icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e8f2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0d6efd;
+}
+
+/* Meta columns */
+.meta-cell .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #6c757d;
+}
+
+.meta-cell .value {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Name */
+.report-name {
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .meta-cell {
+    display: none;
+  }
+}
+
